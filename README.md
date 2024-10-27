@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Application Overview
+This innovative platform harnesses the power of AI to deliver an immersive learning experience for students, integrating Canvas data and gamifying academic engagement through interactive AI-driven quizzes and chatbots. The application uses state-of-the-art tools like Firebase, OpenAI, and Pinecone DB to create a personalized, private, and engaging learning journey.
 
-## Getting Started
+Key Functionalities
+Canvas Integration and User Privacy
 
-First, run the development server:
+The app securely gathers a student’s Canvas Access Token to access their Canvas profile and academic resources. The access token is stored in the user's local storage to ensure data privacy, while the profile information is stored in Firebase for easy access and management.
+Automated Course Retrieval and Material Management
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Once connected, the platform fetches and organizes the student’s course list from Canvas and stores this information in Firebase. Simultaneously, it retrieves all relevant course materials from Canvas using Canvas API and prepares them for further processing.
+Intelligent Document Processing and Vector Embedding
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The system processes course materials by splitting PDFs into manageable sections (1000 characters each, with a 200-character overlap for context continuity).
+Each section is then embedded using OpenAI's advanced embedding models, creating vector representations that are stored in Pinecone DB. This indexed database, coupled with metadata, allows for rapid retrieval of relevant content, optimized for interactive learning.
+Interactive Gamified Learning with AI Bots
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application features two AI-driven bots: a Quiz Bot and a Chat Bot. These bots offer students an engaging and entertaining way to interact with their study material.
+With gamification elements, the Quiz Bot and Chat Bot make learning more interactive, presenting quizzes and conversations that adapt based on the student’s progress and performance.
+Contextual and Adaptive Learning
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The AI bots analyze the student-provided context and transform it into embeddings. Using similarity search in Pinecone DB, they retrieve the top 5 most relevant vectors to craft tailored quizzes and chat responses that align with the student’s learning goals.
+Motivational and Educational UI
 
-## Learn More
+The user interface is designed to encourage continuous learning by providing quizzes and feedback based on student performance. When a student scores below a certain threshold, the Quiz Bot gently motivates them to revisit the material through an entertaining, interactive experience, improving academic understanding with each interaction.
+Example .env Configuration
+plaintext
+Copy code
+# Canvas API Access Token
+CANVAS_ACCESS_TOKEN=<Your Canvas Access Token>
 
-To learn more about Next.js, take a look at the following resources:
+# Firebase Configuration
+FIREBASE_API_KEY=<Your Firebase API Key>
+FIREBASE_AUTH_DOMAIN=<Your Firebase Auth Domain>
+FIREBASE_PROJECT_ID=<Your Firebase Project ID>
+FIREBASE_STORAGE_BUCKET=<Your Firebase Storage Bucket>
+FIREBASE_MESSAGING_SENDER_ID=<Your Firebase Messaging Sender ID>
+FIREBASE_APP_ID=<Your Firebase App ID>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# OpenAI API Key for Embeddings
+OPENAI_API_KEY=<Your OpenAI API Key>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Pinecone Database API Key and Environment
+PINECONE_API_KEY=<Your Pinecone API Key>
+PINECONE_ENVIRONMENT=<Your Pinecone Environment>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Application Settings
+QUIZ_THRESHOLD_SCORE=<Minimum Score to Pass the Quiz>
+VECTOR_CHUNK_SIZE=1000  # Size of text chunks (in characters)
+VECTOR_OVERLAP_SIZE=200  # Overlap size for context continuity
+MAX_SIMILAR_VECTORS=5  # Number of top similar vectors to retrieve
