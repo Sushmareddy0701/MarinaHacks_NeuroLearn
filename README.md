@@ -59,6 +59,9 @@ QUIZ_THRESHOLD_SCORE=<Minimum Score to Pass the Quiz>
 VECTOR_CHUNK_SIZE=1000  # Size of text chunks (in characters)
 VECTOR_OVERLAP_SIZE=200  # Overlap size for context continuity
 MAX_SIMILAR_VECTORS=5  # Number of top similar vectors to retrieve
+
+
+
 📌 Important Notes:
 Canvas Access Token is stored locally on the device to prioritize user privacy.
 Firebase is utilized to manage user profiles and course data, making it easy to access relevant information.
